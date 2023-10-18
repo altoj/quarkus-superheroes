@@ -10,9 +10,9 @@ name: Java CI with Maven
 
 on:
   push:
-    branches: [ "main" ]
+    branches: [ "docker-workflows" ]
   pull_request:
-    branches: [ "main" ]
+    branches: [ "docker-workflows" ]
 
 jobs:
   build:
