@@ -11,5 +11,6 @@
     <modules>
         <module>villains-service</module>
         <module>heroes-service</module>
+        <module>fights-service</module>
     </modules>
 </project>
