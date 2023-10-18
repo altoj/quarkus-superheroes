@@ -6,19 +6,17 @@
 # separate terms of service, privacy policy, and support
 # documentation.
 
-name: Java CI with Maven
+name: Battle UI Workflow
 
 on:
   push:
-    branches: [ "main" ]
+    branches: [ "docker-workflows", "main" ]
   pull_request:
     branches: [ "main" ]
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
-
     steps:
     - uses: actions/checkout@v4
     - name: Setup Java JDK
@@ -27,12 +25,10 @@ jobs:
         java-version: '17'
         distribution: 'temurin'
         cache: maven
-    - name: Java Build Tools
-      run: |
-        java --version
-        mvn --version
-    - name: Build Superheroes (Quarkus)
-      run: mvn -B package --file pom.xml
+    - name: Maven CI
+      run: mvn -B test --file battle-ui/pom.xml
+    - name: Maven Build
+      run: mvn package -B -DskipTests --file battle-ui/pom.xml
     - name: Set up QEMU
       uses: docker/setup-qemu-action@v3
     - name: Set up Docker Buildx
@@ -42,10 +38,10 @@ jobs:
       with:
         username: ${{ secrets.DOCKERHUB_USERNAME }}
         password: ${{ secrets.DOCKERHUB_TOKEN }}
-    - name: Build and push Villain Service
+    - name: Build and push
       uses: docker/build-push-action@v5
       with:
-        context: villains-service
-        file: src/main/docker/Dockerfile.jvm
+        context: battle-ui
+        file: battle-ui/src/main/docker/Dockerfile.jvm
         push: true
-        tags: user/app:latest
+        tags: hsmdevonly/superheroes-battle-ui:latest
