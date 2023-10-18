@@ -6,7 +6,7 @@
 # separate terms of service, privacy policy, and support
 # documentation.
 
-name: Villain Service Workflow
+name: Heroes Service Workflow
 
 on:
   push:
