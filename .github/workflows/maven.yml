@@ -32,4 +32,4 @@ jobs:
         java --version
         mvn --version
     - name: Build Superheroes (Quarkus)
-      run: mvn -B package --file superheroes-quarkus/pom.xml
+      run: mvn -B package --file pom.xml
