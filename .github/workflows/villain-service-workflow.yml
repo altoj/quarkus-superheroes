@@ -6,7 +6,7 @@
 # separate terms of service, privacy policy, and support
 # documentation.
 
-name: Java CI with Maven
+name: Villain Service Workflow
 
 on:
   push:
@@ -16,9 +16,7 @@ on:
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
-
     steps:
     - uses: actions/checkout@v4
     - name: Setup Java JDK
@@ -27,12 +25,8 @@ jobs:
         java-version: '17'
         distribution: 'temurin'
         cache: maven
-    - name: Java Build Tools
-      run: |
-        java --version
-        mvn --version
-    - name: Build Superheroes (Quarkus)
-      run: mvn -B package -DskipTests --file pom.xml
+    - name: Maven Package
+      run: mvn -B package --file villains-service/pom.xml
     - name: Set up QEMU
       uses: docker/setup-qemu-action@v3
     - name: Set up Docker Buildx
@@ -42,10 +36,10 @@ jobs:
       with:
         username: ${{ secrets.DOCKERHUB_USERNAME }}
         password: ${{ secrets.DOCKERHUB_TOKEN }}
-    - name: Build and push Villain Service
+    - name: Build and push
       uses: docker/build-push-action@v5
       with:
         context: villains-service
         file: villains-service/src/main/docker/Dockerfile.jvm
         push: true
-        tags: user/app:latest
+        tags: hsmdevonly/superheroes-villains-service:latest
