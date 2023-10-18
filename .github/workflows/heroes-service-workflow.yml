@@ -26,9 +26,9 @@ jobs:
         distribution: 'temurin'
         cache: maven
     - name: Maven CI
-      run: mvn -B test --file villains-service/pom.xml
+      run: mvn -B test --file heroes-service/pom.xml
     - name: Maven Build
-      run: mvn package -B -DskipTests --file villains-service/pom.xml
+      run: mvn package -B -DskipTests --file heroes-service/pom.xml
     - name: Set up QEMU
       uses: docker/setup-qemu-action@v3
     - name: Set up Docker Buildx
@@ -41,7 +41,7 @@ jobs:
     - name: Build and push
       uses: docker/build-push-action@v5
       with:
-        context: villains-service
-        file: villains-service/src/main/docker/Dockerfile.jvm
+        context: heroes-service
+        file: heroes-service/src/main/docker/Dockerfile.jvm
         push: true
-        tags: hsmdevonly/superheroes-villains-service:latest
+        tags: hsmdevonly/superheroes-heroes-service:latest
