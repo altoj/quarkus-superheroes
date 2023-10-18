@@ -10,5 +10,6 @@
     <name>Superheroes Microservices</name>
     <modules>
         <module>villains-service</module>
+        <module>heroes-service</module>
     </modules>
 </project>
