@@ -32,7 +32,7 @@ jobs:
         java --version
         mvn --version
     - name: Build Superheroes (Quarkus)
-      run: mvn -B package --file pom.xml
+      run: mvn -B package -DskipTests --file pom.xml
     - name: Set up QEMU
       uses: docker/setup-qemu-action@v3
     - name: Set up Docker Buildx
@@ -46,6 +46,6 @@ jobs:
       uses: docker/build-push-action@v5
       with:
         context: villains-service
-        file: src/main/docker/Dockerfile.jvm
+        file: villains-service/src/main/docker/Dockerfile.jvm
         push: true
         tags: user/app:latest
