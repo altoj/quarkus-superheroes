@@ -1,0 +1,28 @@
+global:
+  scrape_interval: 15s # By default, scrape targets every 15 seconds.
+
+scrape_configs:
+  - job_name: 'prometheus'
+    static_configs:
+      - targets: [ 'localhost:9090' ]
+  - job_name: 'fights'
+    metrics_path: '/q/metrics'
+    static_configs:
+      - targets: [ 'fights-service:8082' ]
+  - job_name: 'heroes'
+    metrics_path: '/q/metrics'
+    static_configs:
+      - targets: [ 'heroes-service:8083' ]
+  - job_name: 'villains'
+    metrics_path: '/q/metrics'
+    static_configs:
+      - targets: [ 'villains-service:8084' ]
+  - job_name: event-stats
+    metrics_path: /q/metrics
+    honor_labels: true
+    static_configs:
+      - targets: [ 'event-statistics-service:8085' ]
+  - job_name: ui-super-heroes
+    honor_labels: true
+    static_configs:
+      - targets: ['battle-ui:8080']
