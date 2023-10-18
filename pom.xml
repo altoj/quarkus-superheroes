@@ -13,5 +13,6 @@
         <module>heroes-service</module>
         <module>fights-service</module>
         <module>event-statistics-service</module>
+        <module>battle-ui</module>
     </modules>
 </project>
