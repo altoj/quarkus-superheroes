@@ -22,13 +22,13 @@ public class HeroesVillainsWiremockServerResource implements QuarkusTestResource
         this.wireMockServer.start();
 
         var url = String.format(
-                "localhost:%d",
+                "http://localhost:%d/",
                 this.wireMockServer.isHttpsEnabled() ? this.wireMockServer.httpsPort() : this.wireMockServer.port()
         );
 
         return Map.of(
-                "quarkus.stork.hero-service.service-discovery.address-list", url,
-                "quarkus.stork.villain-service.service-discovery.address-list", url
+                "quarkus.rest-client.hero-client.url", url,
+                "fight.villain.client-base-url", url
         );
     }
 

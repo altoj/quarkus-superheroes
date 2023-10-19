@@ -32,52 +32,8 @@ quarkus:
     info-title: Hero API
     info-description: This API allows CRUD operations on a hero
     info-version: 1.0
-    info-contact-name: Quarkus
-    info-contact-url: https://github.com/quarkusio
   swagger-ui:
     always-include: true
-  container-image:
-    builder: docker
-    registry: quay.io
-    group: quarkus-super-heroes
-    name: "${quarkus.application.name}"
-  kubernetes:
-    part-of: heroes-service
-    annotations:
-      "app.openshift.io/connects-to": heroes-db,otel-collector
-    env:
-      configmaps: "${quarkus.application.name}-config"
-      secrets: "${quarkus.application.name}-config-creds"
-    labels:
-      app: "${quarkus.application.name}"
-      application: "${quarkus.kubernetes.part-of}"
-      system: quarkus-super-heroes
-  openshift:
-    base-jvm-image: registry.access.redhat.com/ubi9/openjdk-17:1.14
-    base-native-image: quay.io/quarkus/ubi-quarkus-native-binary-s2i:2.0
-    part-of: "${quarkus.kubernetes.part-of}"
-    route:
-      expose: true
-    annotations:
-      "app.openshift.io/connects-to": heroes-db,otel-collector
-    env:
-      configmaps: "${quarkus.kubernetes.env.configmaps}"
-      secrets: "${quarkus.kubernetes.env.secrets}"
-    labels:
-      app: "${quarkus.kubernetes.labels.app}"
-      application: "${quarkus.openshift.part-of}"
-      system: "${quarkus.kubernetes.labels.system}"
-  knative:
-    part-of: "${quarkus.kubernetes.part-of}"
-    annotations:
-      "app.openshift.io/connects-to": heroes-db,otel-collector
-    env:
-      configmaps: "${quarkus.kubernetes.env.configmaps}"
-      secrets: "${quarkus.kubernetes.env.secrets}"
-    labels:
-      app: "${quarkus.kubernetes.labels.app}"
-      application: "${quarkus.openshift.part-of}"
-      system: "${quarkus.kubernetes.labels.system}"
 
 "%dev":
   quarkus:
@@ -97,19 +53,3 @@ quarkus:
   quarkus:
     hibernate-orm:
       sql-load-script: import.sql
-
-"%kubernetes":
-  quarkus:
-    config:
-      profile:
-        parent: prod
-    kubernetes:
-      deployment-target: kubernetes
-
-"%knative":
-  quarkus:
-    config:
-      profile:
-        parent: prod
-    kubernetes:
-      deployment-target: knative
