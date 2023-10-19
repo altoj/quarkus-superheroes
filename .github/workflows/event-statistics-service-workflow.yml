@@ -45,3 +45,5 @@ jobs:
         file: event-statistics-service/src/main/docker/Dockerfile.jvm
         push: true
         tags: hsmdevonly/superheroes-event-statistics-service:latest
+        cache-from: type=gha
+        cache-to: type=gha,mode=max
