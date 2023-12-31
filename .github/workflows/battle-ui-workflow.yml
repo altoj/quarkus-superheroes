@@ -44,6 +44,6 @@ jobs:
         context: battle-ui
         file: battle-ui/src/main/docker/Dockerfile.jvm
         push: true
-        tags: hsmdevonly/superheroes-battle-ui:latest
+        tags: ${{ secrets.DOCKERHUB_USERNAME }}/superheroes-battle-ui:latest
         cache-from: type=gha
         cache-to: type=gha,mode=max
