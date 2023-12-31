@@ -10,7 +10,7 @@ name: Villain Service Workflow
 
 on:
   push:
-    branches: [ "docker-workflows", "main" ]
+    branches: [ "main" ]
   pull_request:
     branches: [ "main" ]
 
