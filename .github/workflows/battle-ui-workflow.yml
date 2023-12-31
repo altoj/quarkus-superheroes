@@ -10,7 +10,7 @@ name: Battle UI Workflow
 
 on:
   push:
-    branches: [ "docker-workflows", "main" ]
+    branches: [ "dev-ci", "main" ]
   pull_request:
     branches: [ "main" ]
 
@@ -44,6 +44,16 @@ jobs:
         context: battle-ui
         file: battle-ui/src/main/docker/Dockerfile.jvm
         push: true
-        tags: hsmdevonly/superheroes-battle-ui:latest
+        tags: ${{ secrets.DOCKERHUB_USERNAME }}/superheroes-battle-ui:latest
         cache-from: type=gha
         cache-to: type=gha,mode=max
+    - run: |
+        env
+      shell: bash
+      
+    - name: Slack Notification Demo
+      uses: bryannice/gitactions-slack-notification@2.0.0
+      env:
+        SLACK_INCOMING_WEBHOOK: ${{ secrets.SLACK_INCOMING_WEBHOOK }}
+        SLACK_MESSAGE: 'Demoing the Slack Notification'
+        SLACK_TITLE: 'Slack Notification Demo'

@@ -10,7 +10,7 @@ name: Heroes Service Workflow
 
 on:
   push:
-    branches: [ "docker-workflows", "main" ]
+    branches: [ "main" ]
   pull_request:
     branches: [ "main" ]
 
@@ -44,6 +44,6 @@ jobs:
         context: heroes-service
         file: heroes-service/src/main/docker/Dockerfile.jvm
         push: true
-        tags: hsmdevonly/superheroes-heroes-service:latest
+        tags: ${{ secrets.DOCKERHUB_USERNAME }}/superheroes-heroes-service:latest
         cache-from: type=gha
         cache-to: type=gha,mode=max

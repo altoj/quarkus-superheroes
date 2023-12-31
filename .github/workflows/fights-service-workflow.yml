@@ -10,7 +10,7 @@ name: Fights Service Workflow
 
 on:
   push:
-    branches: [ "docker-workflows", "main" ]
+    branches: [ "main" ]
   pull_request:
     branches: [ "main" ]
 
@@ -44,6 +44,6 @@ jobs:
         context: fights-service
         file: fights-service/src/main/docker/Dockerfile.jvm
         push: true
-        tags: hsmdevonly/superheroes-fights-service:latest
+        tags: ${{ secrets.DOCKERHUB_USERNAME }}/superheroes-fights-service:latest
         cache-from: type=gha
         cache-to: type=gha,mode=max

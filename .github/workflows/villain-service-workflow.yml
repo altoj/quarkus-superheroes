@@ -10,7 +10,7 @@ name: Villain Service Workflow
 
 on:
   push:
-    branches: [ "docker-workflows", "main" ]
+    branches: [ "main" ]
   pull_request:
     branches: [ "main" ]
 
@@ -44,6 +44,6 @@ jobs:
         context: villains-service
         file: villains-service/src/main/docker/Dockerfile.jvm
         push: true
-        tags: hsmdevonly/superheroes-villains-service:latest
+        tags: ${{ secrets.DOCKERHUB_USERNAME }}/superheroes-villains-service:latest
         cache-from: type=gha
         cache-to: type=gha,mode=max

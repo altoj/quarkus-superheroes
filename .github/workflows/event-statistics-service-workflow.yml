@@ -10,7 +10,7 @@ name: Event Statistics Service Workflow
 
 on:
   push:
-    branches: [ "docker-workflows", "main" ]
+    branches: [ "main" ]
   pull_request:
     branches: [ "main" ]
 
@@ -44,6 +44,6 @@ jobs:
         context: event-statistics-service
         file: event-statistics-service/src/main/docker/Dockerfile.jvm
         push: true
-        tags: hsmdevonly/superheroes-event-statistics-service:latest
+        tags: ${{ secrets.DOCKERHUB_USERNAME }}/superheroes-event-statistics-service:latest
         cache-from: type=gha
         cache-to: type=gha,mode=max
